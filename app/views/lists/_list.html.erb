@@ -1,7 +1,16 @@
 <div id="<%= dom_id list %>">
   <p>
-    <strong>Name:</strong>
+    <strong>List:</strong>
     <%= list.name %>
   </p>
+
+  <ul>
+    <% list.items.each do |item| %>
+      <li>
+        <%= render item %>
+
+      </li>
+    <% end %>
+  </ul>
 
 </div>
