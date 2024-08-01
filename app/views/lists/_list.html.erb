@@ -1,11 +1,13 @@
 <div id="<%= dom_id list %>">
   <p>
     <strong>List:</strong>
+    <%= list.id %>
     <%= list.name %>
+    <%= list.row_order %>
   </p>
 
   <ul>
-    <% list.items.each do |item| %>
+    <% list.items.rank(:row_order).each do |item| %>
       <li>
         <%= render item %>
       </li>
