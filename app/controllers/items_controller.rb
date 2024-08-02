@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   def sort
     #debugger
     @item = Item.find(params[:id])
-    @item.update(row_order_position: params[:row_order_position])
+    @item.update(row_order_position: params[:row_order_position], list_id: params[:list_id])
     head :no_content
   end
 
