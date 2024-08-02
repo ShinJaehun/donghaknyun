@@ -11,16 +11,23 @@ export default class extends Controller {
   }
 
   onEnd(event){
-    //const sortableUpdateUrl = event.item.dataset.sortableUpdateUrl
-    //const sortableListId = event.item.dataset.sortableListId
-    console.log(event.newIndex)
-    console.log(event.item)
-    console.log(event.item.dataset)
-    console.log(event.item.dataset.sortableId)
+    console.log("newIndex: ", event.newIndex)
+    //console.log(event.item)
+    //console.log(event.item.dataset)
+    //console.log(event.item.dataset.sortableId)
 
-    put(`/lists/${event.item.dataset.sortableId}/sort`, {
+    //put(`/lists/${event.item.dataset.sortableId}/sort`, {
+      //body: JSON.stringify({row_order_position: event.newIndex})
+    //})
+
+    console.log(event.item.dataset.sortableUpdateUrl)
+    const sortableUpdateUrl = event.item.dataset.sortableUpdateUrl
+    put(sortableUpdateUrl, {
       body: JSON.stringify({row_order_position: event.newIndex})
     })
+
+    //const sortableListId = event.item.dataset.sortableListId
+
 
   }
 }

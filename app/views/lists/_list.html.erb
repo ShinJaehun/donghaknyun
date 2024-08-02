@@ -6,9 +6,10 @@
     <%= list.row_order %>
   </p>
 
-  <ul>
+  <ul data-controller="sortable">
     <% list.items.rank(:row_order).each do |item| %>
-      <li>
+      <!--<li data-sortable-id="<%#= item.id %>">-->
+      <li data-sortable-update-url="<%= sort_item_path(item) %>">
         <%= render item %>
       </li>
     <% end %>
