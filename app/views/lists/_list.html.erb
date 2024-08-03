@@ -1,18 +1,19 @@
 <div id="<%= dom_id list %>">
   <p>
     <strong>List:</strong>
-    <%= list.id %>
+    <%#= list.id %>
     <%= list.name %>
-    <%= list.row_order %>
+    <%#= list.row_order %>
   </p>
 
-  <ul data-controller="sortable" data-sortable-group-value="items" data-sortable-list-id="<%= list.id %>">
+  <div class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-list-id="<%= list.id %>">
     <% list.items.rank(:row_order).each do |item| %>
       <!--<li data-sortable-id="<%#= item.id %>">-->
-      <li data-sortable-update-url="<%= sort_item_path(item) %>">
+      <!-- <div data-sortable-update-url="<%#= sort_item_path(item) %>">-->
+      <div data-sortable-item-id="<%= item.id %>">
         <%= render item %>
-      </li>
+      </div>
     <% end %>
-  </ul>
+  </div>
 
 </div>

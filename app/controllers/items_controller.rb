@@ -1,10 +1,19 @@
 class ItemsController < ApplicationController
-  #before_action :set_item, only: %i[ edit update ]
+  before_action :set_item, only: %i[ edit update ]
 
   def sort
     #debugger
     @item = Item.find(params[:id])
     @item.update(row_order_position: params[:row_order_position], list_id: params[:list_id])
+    head :no_content
+  end
+
+  def clone
+    #debugger
+    @item_source = Item.find(params[:id])
+    @item = Item.new(list_id: params[:list_id], user: current_user, body: @item_source.body, row_order_position: params[:row_order_position])
+    #debugger
+    @item.save
     head :no_content
   end
 

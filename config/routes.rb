@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   resources :items do
     member do
-      put :sort
+      put :sort, :clone
     end
   end
-  resources :lists do
-    member do
-      put :sort
-    end
-  end
+  resources :lists
+  #resources :lists do
+    #member do
+      #put :sort
+    #end
+  #end
   devise_for :users
   root 'site#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

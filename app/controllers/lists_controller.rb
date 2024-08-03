@@ -4,15 +4,17 @@ class ListsController < ApplicationController
   # GET /lists or /lists.json
   def index
     #@lists = List.all
-    @lists = List.rank(:row_order)
+    @list_source = List.first
+    #@lists = List.rank(:row_order) #list 순서를 뒤바꿀 게 아니니까 이거 필요 없지 않나?
+    @lists = List.all.drop(1)
   end
 
-  def sort
-    @list = List.find(params[:id])
-    @list.update(row_order_position: params[:row_order_position])
-    #debugger
-    head :no_content #이게 여기에서 온 거~~~
-  end
+  #def sort
+    #@list = List.find(params[:id])
+    #@list.update(row_order_position: params[:row_order_position])
+    ##debugger
+    #head :no_content #이게 여기에서 온 거~~~
+  #end
 
   # GET /lists/1 or /lists/1.json
   def show
