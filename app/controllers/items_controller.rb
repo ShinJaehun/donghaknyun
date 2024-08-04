@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[ edit update ]
+  before_action :set_item, only: %i[ edit update destroy ]
 
   def sort
     #debugger
@@ -32,6 +32,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @item.destroy!
+
+    redirect_to lists_url
+  end
 
   private
     def set_item

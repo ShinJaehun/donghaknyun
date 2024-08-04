@@ -1,10 +1,20 @@
-<div class="item" draggable="true" style="width: 200px; margin: 5px padding: 5px; border-radius: 5px; background: #FFFFFF; cursor: pointer; text-align: center;">
+<div class="item" draggable="true" style="width: 200px; margin: 5px; padding: 5px; border-radius: 5px; background: #FFFFFF; cursor: pointer; display: flex; align-items: center;">
 <!--
 <div id="<%#= dom_id item %>">
--->
-  <p>
+  -->
+  <div>
     <%#= item.id %>
     <%= item.body %>
     <%#= item.row_order %>
-  </p>
+  </div>
+
+  <div style="margin-left: auto; display: flex;">
+    <!--<i class="fa fa-times-circle" style="color: red;"></i>-->
+    <% if item.user_id == current_user.id %>
+      <%= link_to item_path(item), data: { turbo_method: :delete } do %>
+        <i class="fa fa-times-circle" style="color: red;"></i>
+      <% end %>
+    <% end %>
+
+  </div>
 </div>

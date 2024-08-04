@@ -4,6 +4,7 @@ import "controllers"
 //import "bootstrap"
 import * as bootstrap from 'bootstrap'
 import "@rails/request.js"
+import "@fortawesome/fontawesome-free"
 
 console.log("넌 뒤졌어~")
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
