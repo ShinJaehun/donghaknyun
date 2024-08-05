@@ -109,9 +109,14 @@ export default class extends Controller {
       //post(`/items/${event.item.dataset.sortableItemId}`, {
       post(`/items/`, {
         body: JSON.stringify({row_order_position: event.newIndex, list_id: toListId, sortable_item_id: sortableItemId})
+      }).then(response => { // 한번 reload해야 새로 추가된 item에 delete button이 활성화 된다...
+        if(response.ok){
+          console.log("the item successfylly created")
+          window.location.reload()
+        }
       })
 
-      window.location.reload() // 한번 reload해야 새로 추가된 item에 delete button이 활성화 된다...
+      //window.location.reload() // 이렇게 하니까 어떨 때는 reload가 안 되는 경우도 생김...
 
     } else {
       put(`/items/${event.item.dataset.sortableItemId}/sort`, {
