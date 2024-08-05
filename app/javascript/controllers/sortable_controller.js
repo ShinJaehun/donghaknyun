@@ -7,8 +7,13 @@ export default class extends Controller {
   static values = { group: String }
   connect() {
 
-    this.current_user_username=document.querySelector("meta[name='current_user_username']").getAttribute("content")
-    this.current_user_id=document.querySelector("meta[name='current_user_id']").getAttribute("content")
+    if (document.querySelector("meta[name='current_user_username']")){
+      this.current_user_username=document.querySelector("meta[name='current_user_username']").getAttribute("content")
+    }
+
+    if (document.querySelector("meta[name='current_user_id']")){
+      this.current_user_id=document.querySelector("meta[name='current_user_id']").getAttribute("content")
+    }
     //console.log(this.current_user_username)
     //this.item_user_username=document.querySelector("meta[name='item_user_username']").getAttribute("content")
     //console.log(this.item_user_username)
@@ -31,7 +36,9 @@ export default class extends Controller {
     //})
 
     //console.log(this.groupValue)
-    Sortable.create(group1, {
+    Sortable.create(group_source, {
+      draggable: ".item-source",
+      onMove: this.onMove.bind(this),
       onEnd: this.onEnd.bind(this),
       group: {
         name: this.groupValue,
@@ -41,7 +48,7 @@ export default class extends Controller {
     })
 
     Sortable.create(this.element, {
-      filter: ".exclude",
+      draggable: ".item",
       onMove: this.onMove.bind(this),
       onEnd: this.onEnd.bind(this),
       group: {
@@ -54,24 +61,31 @@ export default class extends Controller {
   onMove(event){
 
     //console.log(event)
-    console.log(event.dragged.parentNode.getAttribute('data-sortable-list-id'))
-
+    //console.log(event.dragged.parentNode.getAttribute('data-sortable-list-id'))
+    console.log(event.related)
     const sortableListId = event.dragged.parentNode.getAttribute('data-sortable-list-id')
     //console.log(event.dragged.getAttribute('data-sortable-item-user-id'))
     const sortableItemUserId = event.dragged.getAttribute('data-sortable-item-user-id')
     //const sortableItemUserId = event.item.dataset.sortableItemUserId
+
+    if (!this.current_user_id) {
+      return false
+    }
+
     if (sortableListId != 1 && this.current_user_id != sortableItemUserId) {
     // todo lists에서 clone은 모두 가능!
       return false
     }
 
-    //} else if (sortableListId == 1 && this.current_user_id != 1) {
-    // 그니까 얘는 적용이 안 되는데... list 내에서 왔다갔다하는 건 event.dragged로 처리되지 않는 듯...
+    //if (this.current_user_id != 1 && sortableListId == 1 ) {
+      //list 내에서 왔다갔다하는 거
+      //걍 current_user_id가 1이 아니면 아예 움직이지 못하는 거지 머...
       //return false
     //}
   }
 
   onEnd(event){
+    console.log("onEnd()")
     //console.log("item_user_id: ", event.item.dataset.sortableItemUserId)
     //const sortableItemUserId = event.item.dataset.sortableItemUserId
     //console.log("newIndex: ", event.newIndex)

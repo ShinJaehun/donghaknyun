@@ -9,11 +9,11 @@
         <strong>List:</strong>
         <%= @list_source.name %>
       </p>
-      <div id="group1" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-list-id="<%= @list_source.id %>">
+      <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-list-id="<%= @list_source.id %>">
         <% @list_source.items.rank(:row_order).each do |item| %>
           <!--<li data-sortable-id="<%#= item.id %>">-->
             <!--<div data-sortable-update-url="<%#= sort_item_path(item) %>">-->
-          <div data-sortable-item-id="<%= item.id %>">
+          <div class="item-source" data-sortable-item-id="<%= item.id %>" data-sortable-item-user-id="<%= item.user_id %>">
             <%= render item %>
           </div>
         <% end %>
