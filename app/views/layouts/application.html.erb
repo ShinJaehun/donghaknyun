@@ -6,6 +6,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= tag.meta name: "current_user_username", content: current_user.username if user_signed_in? %>
+    <%= tag.meta name: "current_user_id", content: current_user.id if user_signed_in? %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>

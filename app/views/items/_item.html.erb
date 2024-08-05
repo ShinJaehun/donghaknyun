@@ -6,11 +6,13 @@
     <%#= item.id %>
     <%= item.body %>
     <%#= item.row_order %>
+    <%#= tag.meta name: "item_user_username", content: item.user.username %>
+    <%#= tag.meta name: "item_user_id", content: item.user.id %>
   </div>
 
   <div style="margin-left: auto; display: flex;">
     <!--<i class="fa fa-times-circle" style="color: red;"></i>-->
-    <% if item.user_id == current_user.id %>
+    <% if user_signed_in? && item.user_id == current_user.id %>
       <%= link_to item_path(item), data: { turbo_method: :delete } do %>
         <i class="fa fa-times-circle" style="color: red;"></i>
       <% end %>
