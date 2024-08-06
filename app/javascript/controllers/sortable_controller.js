@@ -37,8 +37,10 @@ export default class extends Controller {
     //})
 
     //console.log(this.groupValue)
+    //Sortable.create(group_source, {
+    //Sortable.create(this.element, {
     Sortable.create(group_source, {
-      draggable: ".item-source",
+      //draggable: ".item-source",
       //filter: ".exclude",
       onMove: this.onMove.bind(this),
       onEnd: this.onEnd.bind(this),
@@ -50,7 +52,7 @@ export default class extends Controller {
     })
 
     Sortable.create(this.element, {
-      draggable: ".item",
+      //draggable: ".item",
       onMove: this.onMove.bind(this),
       onEnd: this.onEnd.bind(this),
       group: {
@@ -66,10 +68,13 @@ export default class extends Controller {
     //console.log(event.related)
     //console.log(event.dragged)
     //console.log(event.dragged.parentNode.getAttribute('data-sortable-list-id'))
-    const sortableListId = event.dragged.parentNode.getAttribute('data-sortable-list-id')
+    const sortableListId = event.dragged.parentNode.getAttribute('data-sortable-item-list-id')
+    //console.log(sortableListId)
+
     //console.log(event.dragged.getAttribute('data-sortable-item-user-id'))
     const sortableItemUserId = event.dragged.getAttribute('data-sortable-item-user-id')
     //const sortableItemUserId = event.item.dataset.sortableItemUserId
+    //console.log(sortableItemUserId)
 
     if (!this.current_user_id) {
       console.log("아예 움직이질 말어야 하는디")
@@ -89,7 +94,7 @@ export default class extends Controller {
   }
 
   onEnd(event){
-    console.log("onEnd()")
+    //console.log(event.item)
     //console.log("item_user_id: ", event.item.dataset.sortableItemUserId)
     //const sortableItemUserId = event.item.dataset.sortableItemUserId
     //console.log("newIndex: ", event.newIndex)
@@ -108,8 +113,10 @@ export default class extends Controller {
     //})
 
     //console.log(event.to)
-    //console.log("from list id: ", event.from.dataset.sortableListId)
-    //console.log("to list id: ", event.to.dataset.sortableListId)
+    //console.log("from list id: ", event.from)
+    //console.log("to list id: ", event.to)
+    //console.log("from list id: ", event.from.dataset)
+    //console.log("to list id: ", event.to.dataset)
     //console.log(event.to.dataset.sortableListId)
     //const sortableListId = event.to.dataset.sortableListId
     //console.log("sortableListId", sortableListId)
@@ -117,8 +124,8 @@ export default class extends Controller {
       //body: JSON.stringify({row_order_position: event.newIndex, list_id: sortableListId})
     //})
 
-    const fromListId = event.from.dataset.sortableListId
-    const toListId = event.to.dataset.sortableListId
+    const fromListId = event.from.dataset.sortableItemListId
+    const toListId = event.to.dataset.sortableItemListId
 
     const sortableItemId = event.item.dataset.sortableItemId
 
@@ -128,6 +135,7 @@ export default class extends Controller {
       //console.log(event.clone)
     //}
     if (fromListId != toListId && fromListId == 1) {
+      console.log("clone")
       // 나중에 rolify 적용하게 되면 fromListId가 아니라 권한을 확인해야 함
       //post(`/items/${event.item.dataset.sortableItemId}`, {
       //post(`/items/`, {
@@ -143,6 +151,7 @@ export default class extends Controller {
       //window.location.reload() // 이렇게 하니까 어떨 때는 reload가 안 되는 경우도 생김...
 
     } else {
+      console.log("move")
       put(`/items/${event.item.dataset.sortableItemId}/sort`, {
         //body: JSON.stringify({row_order_position: event.newIndex, list_id: sortableListId})
         body: JSON.stringify({row_order_position: event.newIndex, list_id: toListId})

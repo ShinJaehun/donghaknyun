@@ -6,13 +6,11 @@
     <%#= list.row_order %>
   </p>
 
-  <div class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-list-id="<%= list.id %>" style="height: 200px;">
+  <div id="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="<%= list.id %>" style="height: 200px;">
     <% list.items.rank(:row_order).each do |item| %>
       <!--<li data-sortable-id="<%#= item.id %>">-->
       <!-- <div data-sortable-update-url="<%#= sort_item_path(item) %>">-->
-      <div class="item" data-sortable-item-id="<%= item.id %>" data-sortable-item-user-id="<%= item.user_id %>">
         <%= render item %>
-      </div>
     <% end %>
   </div>
 

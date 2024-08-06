@@ -14,18 +14,16 @@
         </div>
       </div>
       <%= turbo_frame_tag Item.new %>
-      <%= turbo_frame_tag "items" do %>
-        <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-list-id="<%= @list_source.id %>">
-          <% @list_source.items.rank(:row_order).each do |item| %>
-            <!--<li data-sortable-id="<%#= item.id %>">-->
-              <!--<div data-sortable-update-url="<%#= sort_item_path(item) %>">-->
-            <div class="item-source" data-sortable-item-id="<%= item.id %>" data-sortable-item-user-id="<%= item.user_id %>">
-              <%= render item %>
-            </div>
-          <% end %>
-        </div>
+      <!--
+      <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="1">
+        -->
+      <%= turbo_frame_tag "group_source", class: "items", data: { controller: "sortable", sortable_group_value: "items", sortable_item_list_id: "1" } do %>
+        <% @list_source.items.rank(:row_order).each do |item| %>
+        <!--<li data-sortable-="<%#= item.id %>">-->
+          <!--<div data-sortableupdate-url="<%#= sort_item_path(item) %>">-->
+            <%= render item %>
+        <% end %>
       <% end %>
-    </div>
   </div>
   <div class="row mt-1" style="display:flex; justify-content: center;">
     <% @lists.each do |list| %>
