@@ -9,24 +9,39 @@ class ItemsController < ApplicationController
     head :no_content
   end
 
-  def create
+  def clone
     #debugger
     @item_source = Item.find(params[:sortable_item_id])
-    @item = Item.new(list_id: params[:list_id], user: current_user, body: @item_source.body, row_order_position: params[:row_order_position])
+    @item = Item.new(
+      list_id: params[:list_id],
+      user: current_user,
+      body: @item_source.body + "(" + current_user.username + ")",
+      row_order_position: params[:row_order_position]
+    )
     #debugger
     @item.save
     head :no_content
 
-    # 혹시 stimulus가 처리하기로 했으면 얘는 처리 못하는 거 아닐까...
-    #respond_to do |format|
-      #if @item.save
-        #format.html { redirect_to lists_url, notice: "item 생성 성공!" }
-      #else
-        #format.html { redirect_to lists_url, status: :unprocessable_entity }
-      #end
-    #end
   end
 
+  def new
+    @item = Item.new
+  end
+
+  def create
+    @item = Item.new(item_params)
+    @item.list_id = 1
+    @item.user = current_user
+
+    respond_to do |format|
+      if @item.save
+        format.html { redirect_to lists_url, notice: "item 생성 성공!" }
+        format.turbo_stream
+      else
+        format.html { redirect_to lists_url, status: :unprocessable_entity }
+      end
+    end
+  end
   #def edit
   #end
 

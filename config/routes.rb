@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :items do
     member do
-      put :sort
+      put :sort, :clone
     end
   end
   resources :lists

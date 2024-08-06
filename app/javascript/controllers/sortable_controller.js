@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import Sortable from 'sortablejs'
-import { put, post } from "@rails/request.js"
+//import { put, post } from "@rails/request.js"
+import { put } from "@rails/request.js"
 
 // Connects to data-controller="sortable"
 export default class extends Controller {
@@ -38,6 +39,7 @@ export default class extends Controller {
     //console.log(this.groupValue)
     Sortable.create(group_source, {
       draggable: ".item-source",
+      //filter: ".exclude",
       onMove: this.onMove.bind(this),
       onEnd: this.onEnd.bind(this),
       group: {
@@ -61,14 +63,16 @@ export default class extends Controller {
   onMove(event){
 
     //console.log(event)
+    //console.log(event.related)
+    //console.log(event.dragged)
     //console.log(event.dragged.parentNode.getAttribute('data-sortable-list-id'))
-    console.log(event.related)
     const sortableListId = event.dragged.parentNode.getAttribute('data-sortable-list-id')
     //console.log(event.dragged.getAttribute('data-sortable-item-user-id'))
     const sortableItemUserId = event.dragged.getAttribute('data-sortable-item-user-id')
     //const sortableItemUserId = event.item.dataset.sortableItemUserId
 
     if (!this.current_user_id) {
+      console.log("아예 움직이질 말어야 하는디")
       return false
     }
 
@@ -118,10 +122,16 @@ export default class extends Controller {
 
     const sortableItemId = event.item.dataset.sortableItemId
 
+    //if (event.clone){
+      // 이렇게 하면 clone 이벤트만 처리할 줄 알았는데 event.item과 다르지 않은 거 같다
+      //console.log("clone입니다.")
+      //console.log(event.clone)
+    //}
     if (fromListId != toListId && fromListId == 1) {
       // 나중에 rolify 적용하게 되면 fromListId가 아니라 권한을 확인해야 함
       //post(`/items/${event.item.dataset.sortableItemId}`, {
-      post(`/items/`, {
+      //post(`/items/`, {
+      put(`/items/${event.item.dataset.sortableItemId}/clone`, {
         body: JSON.stringify({row_order_position: event.newIndex, list_id: toListId, sortable_item_id: sortableItemId})
       }).then(response => { // 한번 reload해야 새로 추가된 item에 delete button이 활성화 된다...
         if(response.ok){

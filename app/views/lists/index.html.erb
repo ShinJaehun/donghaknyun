@@ -1,23 +1,30 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Lists</h1>
-
 <div class="lists">
   <div class="row" style="display: flex; justify-content: center;">
     <div class="col" style="width: 800px; flex: 0 0 800px; height: 300px; border: solid;">
-      <p>
-        <strong>List:</strong>
-        <%= @list_source.name %>
-      </p>
-      <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-list-id="<%= @list_source.id %>">
-        <% @list_source.items.rank(:row_order).each do |item| %>
-          <!--<li data-sortable-id="<%#= item.id %>">-->
-            <!--<div data-sortable-update-url="<%#= sort_item_path(item) %>">-->
-          <div class="item-source" data-sortable-item-id="<%= item.id %>" data-sortable-item-user-id="<%= item.user_id %>">
-            <%= render item %>
-          </div>
-        <% end %>
+      <div style="display: flex; padding: 10px;">
+        <div>
+          <p>
+            <%= @list_source.name %>
+          </p>
+        </div>
+        <div style="margin-left: auto;">
+          <%= link_to "Create", new_item_path, class: "btn btn-primary", data: { turbo_frame: dom_id(Item.new) } %>
+        </div>
       </div>
+      <%= turbo_frame_tag Item.new %>
+      <%= turbo_frame_tag "items" do %>
+        <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-list-id="<%= @list_source.id %>">
+          <% @list_source.items.rank(:row_order).each do |item| %>
+            <!--<li data-sortable-id="<%#= item.id %>">-->
+              <!--<div data-sortable-update-url="<%#= sort_item_path(item) %>">-->
+            <div class="item-source" data-sortable-item-id="<%= item.id %>" data-sortable-item-user-id="<%= item.user_id %>">
+              <%= render item %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="row mt-1" style="display:flex; justify-content: center;">
