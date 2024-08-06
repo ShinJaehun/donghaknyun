@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
       list_id: params[:list_id],
       user: current_user,
       body: @item_source.body + "(" + current_user.username + ")",
+      color: @item_source.color,
       row_order_position: params[:row_order_position]
     )
     #debugger
@@ -32,6 +33,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.list_id = 1
     @item.user = current_user
+    @item.color = random_color
 
     respond_to do |format|
       if @item.save
@@ -79,5 +81,17 @@ class ItemsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def item_params
       params.require(:item).permit(:body)
+    end
+
+    def random_color
+      floor=22
+      r=(rand(256-floor)+floor).to_s 16
+      g=(rand(256-floor)+floor).to_s 16
+      b=(rand(256-floor)+floor).to_s 16
+      color=[r,g,b].map{|h|h.rjust 2,'0'}.join
+      puts "##############################################################################"
+      puts color
+      puts "##############################################################################"
+      color
     end
 end
