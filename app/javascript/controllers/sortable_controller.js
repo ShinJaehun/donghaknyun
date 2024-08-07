@@ -40,13 +40,14 @@ export default class extends Controller {
     //Sortable.create(group_source, {
     //Sortable.create(this.element, {
     Sortable.create(group_source, {
-      //draggable: ".item-source",
       //filter: ".exclude",
       onMove: this.onMove.bind(this),
       onEnd: this.onEnd.bind(this),
+      //sort: false,
       group: {
         name: this.groupValue,
         pull: 'clone',
+        //put: false
       },
       animation: 150
     })
@@ -65,7 +66,7 @@ export default class extends Controller {
   onMove(event){
 
     //console.log(event)
-    //console.log(event.related)
+    console.log(event.related.parentNode.getAttribute('data-sortable-item-list-id'))
     //console.log(event.dragged)
     //console.log(event.dragged.parentNode.getAttribute('data-sortable-list-id'))
     const sortableListId = event.dragged.parentNode.getAttribute('data-sortable-item-list-id')
@@ -85,6 +86,19 @@ export default class extends Controller {
     // todo lists에서 clone은 모두 가능!
       return false
     }
+
+    // 이제 group_source에 있는 items들이 움직이지 않습니다~~
+    // 아 씨발 이거 어떻게 동작하는지 모르겠는데 어떤 새끼가 이렇게 대답해줬어~~
+    // https://github.com/SortableJS/Sortable/issues/1627
+    console.log(event.to.id)
+    if (event.to.id === "group_source") {
+      return event.related === event.to.children[0] && !event.willInsertAfter
+    }
+
+    //if (event.related.classList.contains('no_drag')) {
+      ////console.log("움직이지 마!)
+      //return false
+    //}
 
     //if (this.current_user_id != 1 && sortableListId == 1 ) {
       //list 내에서 왔다갔다하는 거

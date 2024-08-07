@@ -17,6 +17,11 @@
     <div style="margin-left: auto; display: flex;">
       <!--<i class="fa fa-times-circle" style="color: red;"></i>-->
       <%# if user_signed_in? && item.user_id == current_user.id %>
+      <% if item.list_id == 1 and can? :edit, item %>
+        <%= link_to edit_item_path(item) do %>
+          <i class="fa fa-pen-to-square" style="color: black; margin-right: 5px;"></i>
+        <% end %>
+      <% end %>
       <% if can? :destroy, item %>
         <%= link_to item_path(item), data: { turbo_method: :delete } do %>
           <i class="fa fa-times-circle" style="color: red;"></i>
