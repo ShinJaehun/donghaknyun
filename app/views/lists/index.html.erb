@@ -1,9 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <div class="lists">
-  <div class="row" style="display: flex; justify-content: center;">
-    <div class="col" style="width: 800px; flex: 0 0 800px; height: 300px; border: solid;">
-      <div style="display: flex; padding: 10px;">
+  <div class="todos row" style="display: flex; justify-content: center;">
+    <div class="list col" style="width: 800px; flex: 0 0 800px; height: 300px; border: solid;">
+      <div class="list head" style="display: flex; padding: 10px;">
         <div>
           <p>
             <%= @list_source.name %>
@@ -14,27 +14,29 @@
             <%= link_to "Create", new_item_path, class: "btn btn-primary", data: { turbo_frame: dom_id(Item.new) } %>
           <% end %>
         </div>
-      </div>
+      </div><!-- list head -->
+
       <%= turbo_frame_tag Item.new %>
-      <!--
-      <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="1">
-        -->
-      <%= turbo_frame_tag "group_source", class: "items", data: { controller: "sortable", sortable_group_value: "items", sortable_item_list_id: "1" } do %>
-        <% @list_source.items.rank(:row_order).each do |item| %>
-        <!--<li data-sortable-="<%#= item.id %>">-->
-          <!--<div data-sortableupdate-url="<%#= sort_item_path(item) %>">-->
-          <%= render item %>
-        <% end %>
+      <%= turbo_frame_tag "items" do %>
+        <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="1" style="display: flex;">
+          <% @list_source.items.rank(:row_order).each do |item| %>
+          <!--<li data-sortable-="<%#= item.id %>">-->
+            <!--<div data-sortableupdate-url="<%#= sort_item_path(item) %>">-->
+            <%= render item %>
+          <% end %>
+        </div><!-- group_source -->
       <% end %>
-  </div>
+    </div><!-- list col -->
+  </div><!-- todos row -->
+
   <div class="row mt-1" style="display:flex; justify-content: center;">
     <% @lists.each do |list| %>
       <!--<div class="list col me-1" data-sortable-update-url="<%#= sort_list_path(list) %>" style="width: 250px; flex: 0 0 250px; height: 250px; border-radius: 10px; background: #AAAAAA;">-->
       <div class="list col me-1" style="width: 250px; flex: 0 0 250px; height: 250px; border-radius: 10px; background: #AAAAAA;">
         <%= render list %>
-      </div>
+      </div><!-- list col -->
     <% end %>
-  </div>
-</div>
+  </div><!-- row -->
+</div><!-- lists -->
 
 <%= link_to "New list", new_list_path %>

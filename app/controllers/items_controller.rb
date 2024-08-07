@@ -62,16 +62,9 @@ class ItemsController < ApplicationController
   #end
 
   def destroy
-    if @item.user == current_user
-      @item.destroy!
-      respond_to do |format|
-        format.html { redirect_to lists_path, notice: "삭제 성공!" }
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to lists_path, status: :unprocessable_entity }
-        put "니께 아닌데 어째 지울 수 있겄냐"
-      end
+    @item.destroy!
+    respond_to do |format|
+      format.html { redirect_to lists_path, notice: "삭제 성공!" }
     end
   end
 
