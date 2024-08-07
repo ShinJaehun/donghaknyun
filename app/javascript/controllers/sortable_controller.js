@@ -152,7 +152,7 @@ export default class extends Controller {
 
     } else {
       console.log("move")
-      put(`/items/${event.item.dataset.sortableItemId}/sort`, {
+      put(`/items/${event.item.dataset.sortableItemId}/move`, {
         //body: JSON.stringify({row_order_position: event.newIndex, list_id: sortableListId})
         body: JSON.stringify({row_order_position: event.newIndex, list_id: toListId})
       })

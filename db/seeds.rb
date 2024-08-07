@@ -9,6 +9,10 @@
 #   end
 u1=User.create(username: "ai", email: "a@a", password: "password", password_confirmation: "password")
 u2=User.create(username: "be", email: "b@b", password: "password", password_confirmation: "password")
+u3=User.create(username: "ce", email: "c@c", password: "password", password_confirmation: "password")
+u1.add_role(:admin)
+u2.add_role(:user)
+u3.add_role(:user)
 
 list1 = List.create(name: 'TODO')
 list1.items.create(body: "과학1준비물", user: u1, color: "ffddd6")

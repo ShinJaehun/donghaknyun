@@ -2,7 +2,9 @@ class ItemsController < ApplicationController
   #before_action :set_item, only: %i[ edit update destroy ]
   before_action :set_item, only: %i[ destroy ]
 
-  def sort
+  load_and_authorize_resource
+
+  def move
     #debugger
     @item = Item.find(params[:id])
     @item.update(row_order_position: params[:row_order_position], list_id: params[:list_id])
