@@ -17,6 +17,7 @@
       </div><!-- list head -->
 
       <%= turbo_frame_tag Item.new %>
+
       <%= turbo_frame_tag "items" do %>
         <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="1" style="display: flex; flex-wrap: wrap;">
           <% @list_source.items.rank(:row_order).each do |item| %>

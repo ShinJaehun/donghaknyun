@@ -46,17 +46,16 @@ class ItemsController < ApplicationController
       end
     end
   end
+
   #def edit
   #end
 
   #def update
     #respond_to do |format|
       #if @item.update(list_params)
-        #format.html { redirect_to item_url(@item), notice: "Item was successfully updated." }
-        #format.json { render :show, status: :ok, location: @item }
+        #format.html { redirect_to lists_url, notice: "Item was successfully updated." }
       #else
-        #format.html { render :edit, status: :unprocessable_entity }
-        #format.json { render json: @item.errors, status: :unprocessable_entity }
+        #format.html { redirect_to lists_url, status: :unprocessable_entity }
       #end
     #end
   #end
@@ -65,6 +64,7 @@ class ItemsController < ApplicationController
     @item.destroy!
     respond_to do |format|
       format.html { redirect_to lists_path, notice: "삭제 성공!" }
+      #format.turbo_stream
     end
   end
 

@@ -66,7 +66,7 @@ export default class extends Controller {
   onMove(event){
 
     //console.log(event)
-    console.log(event.related.parentNode.getAttribute('data-sortable-item-list-id'))
+    //console.log(event.related.parentNode.getAttribute('data-sortable-item-list-id'))
     //console.log(event.dragged)
     //console.log(event.dragged.parentNode.getAttribute('data-sortable-list-id'))
     const sortableListId = event.dragged.parentNode.getAttribute('data-sortable-item-list-id')
@@ -90,7 +90,7 @@ export default class extends Controller {
     // 이제 group_source에 있는 items들이 움직이지 않습니다~~
     // 아 씨발 이거 어떻게 동작하는지 모르겠는데 어떤 새끼가 이렇게 대답해줬어~~
     // https://github.com/SortableJS/Sortable/issues/1627
-    console.log(event.to.id)
+    //console.log(event.to.id)
     if (event.to.id === "group_source") {
       return event.related === event.to.children[0] && !event.willInsertAfter
     }
@@ -108,7 +108,6 @@ export default class extends Controller {
   }
 
   onEnd(event){
-    //console.log(event.item)
     //console.log("item_user_id: ", event.item.dataset.sortableItemUserId)
     //const sortableItemUserId = event.item.dataset.sortableItemUserId
     //console.log("newIndex: ", event.newIndex)
@@ -141,6 +140,8 @@ export default class extends Controller {
     const fromListId = event.from.dataset.sortableItemListId
     const toListId = event.to.dataset.sortableItemListId
 
+    //console.log(event.item.children[0].getAttribute('data-sortable-item-id'))
+    //const sortableItemId = event.item.children[0].getAttribute('data-sortable-item-id')
     const sortableItemId = event.item.dataset.sortableItemId
 
     //if (event.clone){
@@ -153,7 +154,7 @@ export default class extends Controller {
       // 나중에 rolify 적용하게 되면 fromListId가 아니라 권한을 확인해야 함
       //post(`/items/${event.item.dataset.sortableItemId}`, {
       //post(`/items/`, {
-      put(`/items/${event.item.dataset.sortableItemId}/clone`, {
+      put(`/items/${sortableItemId}/clone`, {
         body: JSON.stringify({row_order_position: event.newIndex, list_id: toListId, sortable_item_id: sortableItemId})
       }).then(response => { // 한번 reload해야 새로 추가된 item에 delete button이 활성화 된다...
         if(response.ok){
@@ -166,7 +167,7 @@ export default class extends Controller {
 
     } else {
       console.log("move")
-      put(`/items/${event.item.dataset.sortableItemId}/move`, {
+      put(`/items/${sortableItemId}/move`, {
         //body: JSON.stringify({row_order_position: event.newIndex, list_id: sortableListId})
         body: JSON.stringify({row_order_position: event.newIndex, list_id: toListId})
       })
