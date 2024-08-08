@@ -1,2 +1,4 @@
-<%= turbo_stream.append "group_source", @item %>
+<%= turbo_stream.append "group_source" do %>
+  <%= render "/items/source_item", item: @item %>
+<% end %>
 <%= turbo_stream.update Item.new, "" %>

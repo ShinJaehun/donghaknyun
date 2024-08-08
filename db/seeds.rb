@@ -7,17 +7,17 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-u1=User.create(username: "ai", email: "a@a", password: "password", password_confirmation: "password")
-u2=User.create(username: "be", email: "b@b", password: "password", password_confirmation: "password")
-u3=User.create(username: "ce", email: "c@c", password: "password", password_confirmation: "password")
+u1=User.create(username: "1반", email: "a@a", password: "password", password_confirmation: "password")
+u2=User.create(username: "2반", email: "b@b", password: "password", password_confirmation: "password")
+u3=User.create(username: "3반", email: "c@c", password: "password", password_confirmation: "password")
 u1.add_role(:admin)
 u2.add_role(:user)
 u3.add_role(:user)
 
 list1 = List.create(name: 'TODO')
-list1.items.create(body: "과학1준비물", user: u1, color: "ffddd6")
-list1.items.create(body: "과학2준비물", user: u1, color: "daf7a6")
-list1.items.create(body: "과학3준비물", user: u1, color: "ffc300")
+list1.items.create(name: "과학1", body: "식물의 한살이", user: u1, color: "ffddd6")
+list1.items.create(name: "과학2", body: "용수철 저울", user: u1, color: "daf7a6")
+list1.items.create(name: "과학3", body: "혼합물 분리", user: u1, color: "ffc300")
 
 list2 = List.create(name: 'MON')
 list3 = List.create(name: 'TUE')

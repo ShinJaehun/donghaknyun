@@ -23,7 +23,7 @@
           <% @list_source.items.rank(:row_order).each do |item| %>
           <!--<li data-sortable-="<%#= item.id %>">-->
             <!--<div data-sortableupdate-url="<%#= sort_item_path(item) %>">-->
-            <%= render item %>
+              <%= render "/items/source_item", item: item %>
           <% end %>
         </div><!-- group_source -->
       <% end %>

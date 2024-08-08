@@ -17,7 +17,8 @@ class ItemsController < ApplicationController
     @item = Item.new(
       list_id: params[:list_id],
       user: current_user,
-      body: @item_source.body + "(" + current_user.username + ")",
+      name: @item_source.name + "(" + current_user.username + ")",
+      body: @item_source.body,
       color: @item_source.color,
       row_order_position: params[:row_order_position]
     )
@@ -75,7 +76,7 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:body)
+      params.require(:item).permit(:body, :name)
     end
 
     def random_color
