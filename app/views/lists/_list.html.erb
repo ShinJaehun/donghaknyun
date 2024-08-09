@@ -1,15 +1,7 @@
-<div class="list head">
-  <p>
-    <%#= list.id %>
-    <%= list.name %>
-    <%#= list.row_order %>
-  </p>
-</div>
-
-<div id="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="<%= list.id %>" style="height: 200px;">
-  <% list.items.rank(:row_order).each do |item| %>
-    <!--<li data-sortable-id="<%#= item.id %>">-->
-    <!-- <div data-sortable-update-url="<%#= sort_item_path(item) %>">-->
+<div class="list" style="margin: 10px 0;">
+  <div id="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="<%= list.id %>" style="width: 140px; height: auto; min-height: 90px; padding: 5px; border-radius: 10px; background-color: #dedede;">
+    <% list.items.rank(:row_order).each do |item| %>
       <%= render item %>
-  <% end %>
-</div>
+    <% end %>
+  </div><!-- items -->
+</div><!-- list -->

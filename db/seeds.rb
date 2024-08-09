@@ -19,8 +19,15 @@ list1.items.create(name: "과학1", body: "식물의 한살이", user: u1, color
 list1.items.create(name: "과학2", body: "용수철 저울", user: u1, color: "daf7a6")
 list1.items.create(name: "과학3", body: "혼합물 분리", user: u1, color: "ffc300")
 
-list2 = List.create(name: 'MON')
-list3 = List.create(name: 'TUE')
-list4 = List.create(name: 'WED')
-list5 = List.create(name: 'THU')
-list6 = List.create(name: 'FRI')
+for i in 0..4
+  List.create(name: '1교시')
+  List.create(name: '2교시')
+  List.create(name: '3교시')
+  List.create(name: '4교시')
+  List.create(name: '5교시')
+  List.create(name: '1교시')
+  List.create(name: '2교시')
+  List.create(name: '3교시')
+  List.create(name: '4교시')
+  List.create(name: '5교시')
+end
