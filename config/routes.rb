@@ -4,7 +4,9 @@ Rails.application.routes.draw do
       put :move, :clone
     end
   end
-  resources :lists
+  resources :schedules do
+    resources :lists
+  end
   #resources :lists do
     #member do
       #put :sort
