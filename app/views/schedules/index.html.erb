@@ -1,0 +1,63 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="main">
+  <div class="row" style="display: flex; justify-content: center;">
+    <div class="todo" style="width: 800px; flex: 0 0 800px; height: 300px; border: solid;">
+      <div class="todo head" style="display: flex; padding: 10px;">
+        <div>
+          <h3>
+            <%= @schedule_source.lists.first.name %>
+          </h3>
+        </div>
+        <div style="margin-left: auto;">
+          <% if can? :manage, Item %>
+            <%= link_to "Create", new_item_path, class: "btn btn-primary", data: { turbo_frame: dom_id(Item.new) } %>
+          <% end %>
+        </div>
+      </div><!-- todo head -->
+
+      <%= turbo_frame_tag Item.new %>
+
+      <%= turbo_frame_tag "items" do %>
+        <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="1" style="display: flex; flex-wrap: wrap;">
+          <% @schedule_source.lists.first.items.rank(:row_order).each do |item| %>
+            <%= render "/items/source_item", item: item %>
+          <% end %>
+        </div><!-- group_source -->
+      <% end %>
+    </div><!-- todo -->
+  </div><!-- main -->
+
+  <div class="row row-cols-5 mt-1" style="display:flex; justify-content: center;">
+    <% @schedules.each do |schedule| %>
+      <%= render schedule %>
+    <% end %>
+  </div> <!-- row row-cols-5 -->
+
+  <% if user_signed_in? and can? :manage, Schedule %>
+    <div class="row mt-1">
+      <div class="mt-5 ms-5">
+        <%= link_to "New schedules", schedules_path, class: "btn btn-info", data: { turbo_method: :post } %>
+      </div>
+      <div class="mt-1">
+        <% @mondays.each do |monday| %>
+          <div class="mt-1 ms-5">
+            <!-- 이렇게 비교가 안 되는 거 같다 -->
+            <!--
+            <%# if monday.to_time == Time.zone.today.monday %>
+              이번 주
+            <%# else %>
+              <%#= monday.all_week %>
+            <%# end %>
+            -->
+
+            <%#= link_to, monday.all_week, schedule_pick_path(beginning_of_the_week: monday) %>
+            <%= monday.all_week %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  <% end %>
+</div><!-- schedule -->
+
