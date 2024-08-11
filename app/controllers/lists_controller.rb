@@ -7,6 +7,10 @@ class ListsController < ApplicationController
     @list_source = List.first
     #@lists = List.rank(:row_order) #list 순서를 뒤바꿀 게 아니니까 이거 필요 없지 않나?
     @lists = List.all.drop(1)
+    @schedule=@lists.each_slice(5).to_a.map{|e| Array.new(5){e.shift}}
+    puts '#####################################################################'
+    puts @schedule
+    puts '#####################################################################'
   end
 
   #def sort

@@ -1,0 +1,32 @@
+<div class="col schedule" style="width: 340px; border-style: solid; border-width: 1px; border-color: blue; text-align:center;">
+  <div class="row" style="text-align: center;">
+    <h3>
+      <% if schedule.entry_date.today? %>
+        <%= schedule.entry_date.month.to_s + "월 " + schedule.entry_date.day.to_s + "일  " + schedule.entry_date.strftime("%a")%><span style="color: red;">  오늘</span>
+      <% else %>
+        <%= schedule.entry_date.month.to_s + "월 " + schedule.entry_date.day.to_s + "일  " + schedule.entry_date.strftime("%a") %>
+      <% end %>
+    </h3>
+  </div><!-- row -->
+
+  <div class="row row-cols-2">
+    <div class="col floor3" style="text-align: center;">
+      <h5>3층</h5>
+      <% schedule.lists.each do |list| %>
+        <% if list.floor == 3 %>
+          <%= render list %>
+        <% end %>
+      <% end %>
+    </div><!-- col floor3 -->
+
+    <div class="col floor4" style="text-align: center;">
+      <h5>4층</h5>
+      <% schedule.lists.each do |list| %>
+        <% if list.floor == 4 %>
+          <%= render list %>
+        <% end %>
+      <% end %>
+    </div><!-- col floor4 -->
+  </div><!-- row row-cols-2 -->
+</div><!-- col schedule -->
+

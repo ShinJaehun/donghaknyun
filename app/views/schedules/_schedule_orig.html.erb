@@ -1,33 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
-<div class="schedule">
-  <div class="row" style="display: flex; justify-content: center;">
-    <div class="todo" style="width: 800px; flex: 0 0 800px; height: 300px; border: solid;">
-      <div class="todo head" style="display: flex; padding: 10px;">
-        <div>
-          <h3>
-            <%= @list_source.name %>
-          </h3>
-        </div>
-        <div style="margin-left: auto;">
-          <% if can? :manage, Item %>
-            <%= link_to "Create", new_item_path, class: "btn btn-primary", data: { turbo_frame: dom_id(Item.new) } %>
-          <% end %>
-        </div>
-      </div><!-- todo head -->
-
-      <%= turbo_frame_tag Item.new %>
-
-      <%= turbo_frame_tag "items" do %>
-        <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="1" style="display: flex; flex-wrap: wrap;">
-          <% @list_source.items.rank(:row_order).each do |item| %>
-            <%= render "/items/source_item", item: item %>
-          <% end %>
-        </div><!-- group_source -->
-      <% end %>
-    </div><!-- todo -->
-  </div><!-- row -->
-
   <% i = 0 %>
   <div class="row row-cols-5 mt-1" style="display:flex; justify-content: center;">
     <% Time.zone.today.all_week.reject{|day| day.saturday? || day.sunday? }.each do |day| %>
@@ -62,6 +32,4 @@
       <% i+=2 %>
     <% end %>
   </div> <!-- row row-cols-5 -->
-</div><!-- schedule -->
 
-<%= link_to "New list", new_list_path %>

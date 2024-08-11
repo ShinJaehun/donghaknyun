@@ -1,15 +1,17 @@
-<div class="list head">
-  <p>
-    <%#= list.id %>
+<div class="list" style="margin-bottom: 5px 0;">
+  <div>
     <%= list.name %>
-    <%#= list.row_order %>
-  </p>
-</div>
-
-<div id="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="<%= list.id %>" style="height: 200px;">
-  <% list.items.rank(:row_order).each do |item| %>
-    <!--<li data-sortable-id="<%#= item.id %>">-->
-    <!-- <div data-sortable-update-url="<%#= sort_item_path(item) %>">-->
+  </div>
+  <div id="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="<%= list.id %>" style="width: 140px; height: auto; min-height: 90px; padding: 5px; border-radius: 10px; background-color: #AAAAAA;">
+    <!-- item 외 다른 element가 들어가면 안되나 봐요... -->
+    <!--
+  <div id="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="<%#= list.id %>" style="width: 140px; height: auto; min-height: 90px; padding: 5px; border-radius: 10px; background-color: #AAAAAA; position: relative; z-index: -2;">
+    <div style="position: absolute; z-index: -1; left: 50%; top: 50%; transform: translate(-50%, -50%); color: white;">
+      <%#= list.name %>
+    </div>
+    -->
+    <% list.items.rank(:row_order).each do |item| %>
       <%= render item %>
-  <% end %>
-</div>
+    <% end %>
+  </div><!-- items -->
+</div><!-- list -->

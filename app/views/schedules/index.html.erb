@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="main">
+  <div class="row" style="display: flex; justify-content: center;">
+    <%= render "todo", schedule_source: @schedule_source %>
+  </div><!-- row -->
+
+  <div class="row row-cols-5 mt-1" style="display:flex; justify-content: center;">
+    <% @schedules.each do |schedule| %>
+      <%= render schedule %>
+    <% end %>
+  </div> <!-- row row-cols-5 -->
+
+  <%= render "shared/admin" %>
+</div><!-- schedule -->
