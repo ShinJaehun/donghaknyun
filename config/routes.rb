@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :schedules do
     resources :lists
   end
+  get 'schedule_pick', to: 'schedules#schedule_pick'
   #resources :lists do
     #member do
       #put :sort

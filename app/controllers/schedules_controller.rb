@@ -41,4 +41,20 @@ class SchedulesController < ApplicationController
       end
     end
   end
+
+  def schedule_pick
+    if params.has_key?(:beginning_of_the_week)
+      @monday = params[:beginning_of_the_week].to_date
+    else
+      @monday = Tome.zone.today.monday
+    end
+    @schedule_source = Schedule.first
+    @schedules = Schedule.all.where(entry_date: @monday.all_week) #오늘을 포함하는 주 schedules
+    @mondays=[]
+    Schedule.all.each do |schedule|
+      if schedule.entry_date.monday?
+        @mondays << schedule.entry_date
+      end
+    end
+  end
 end
