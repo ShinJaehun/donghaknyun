@@ -40,10 +40,10 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to lists_url, notice: "item 생성 성공!" }
+        format.html { redirect_to schedules_url, notice: "item 생성 성공!" }
         format.turbo_stream
       else
-        format.html { redirect_to lists_url, status: :unprocessable_entity }
+        format.html { redirect_to schedules_url, status: :unprocessable_entity }
       end
     end
   end
@@ -64,7 +64,7 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy!
     respond_to do |format|
-      format.html { redirect_to lists_path, notice: "삭제 성공!" }
+      format.html { redirect_to schedules_path, notice: "삭제 성공!" }
       #format.turbo_stream
     end
   end
