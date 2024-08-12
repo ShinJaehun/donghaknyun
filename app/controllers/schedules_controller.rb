@@ -2,10 +2,7 @@ class SchedulesController < ApplicationController
   #load_and_authorize_resource
 
   def index
-    #debugger
     @schedule_source = Schedule.first
-    #@schedules = Schedule.all.drop(1)
-    #Schedule.all.where(entry_date: Time.zone.today.all_week) #오늘을 포함하는 주 schedules
     @schedules = Schedule.all.where(entry_date: Time.zone.today.all_week) #오늘을 포함하는 주 schedules
 
     @mondays=[]
@@ -15,9 +12,6 @@ class SchedulesController < ApplicationController
       end
     end
 
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    puts @mondays
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
   end
 
   def create
@@ -49,7 +43,7 @@ class SchedulesController < ApplicationController
       @monday = Tome.zone.today.monday
     end
     @schedule_source = Schedule.first
-    @schedules = Schedule.all.where(entry_date: @monday.all_week) #오늘을 포함하는 주 schedules
+    @schedules = Schedule.all.where(entry_date: @monday.all_week)
     @mondays=[]
     Schedule.all.each do |schedule|
       if schedule.entry_date.monday?

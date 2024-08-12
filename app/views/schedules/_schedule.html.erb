@@ -1,5 +1,5 @@
 <div class="col schedule" style="width: 340px; border-style: solid; border-width: 1px; border-color: blue; text-align:center;">
-  <div class="row" style="text-align: center;">
+  <div class="row mt-3" style="text-align: center;">
     <h3>
       <% if schedule.entry_date.today? %>
         <%= schedule.entry_date.month.to_s + "월 " + schedule.entry_date.day.to_s + "일  " + schedule.entry_date.strftime("%a")%><span style="color: red;">  오늘</span>
@@ -9,7 +9,7 @@
     </h3>
   </div><!-- row -->
 
-  <div class="row row-cols-2">
+  <div class="row row-cols-2 mb-3">
     <div class="col floor3" style="text-align: center;">
       <h5>3층</h5>
       <% schedule.lists.each do |list| %>
