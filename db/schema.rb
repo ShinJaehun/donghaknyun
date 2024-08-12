@@ -11,9 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_08_10_063604) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "items", force: :cascade do |t|
-    t.integer "list_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "list_id", null: false
+    t.bigint "user_id", null: false
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -29,7 +32,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_10_063604) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "row_order"
-    t.integer "schedule_id", null: false
+    t.bigint "schedule_id", null: false
     t.integer "period"
     t.integer "floor"
     t.index ["schedule_id"], name: "index_lists_on_schedule_id"
@@ -38,7 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_10_063604) do
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -66,8 +69,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_10_063604) do
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+    t.bigint "user_id"
+    t.bigint "role_id"
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
