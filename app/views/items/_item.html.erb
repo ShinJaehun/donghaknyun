@@ -1,18 +1,19 @@
-<%#= turbo_frame_tag item do %>
-  <div class="item" data-sortable-item-id="<%= item.id %>" data-sortable-item-user-id="<%= item.user.id %>" style="width: 120px; margin: 5px; padding: 5px; border-radius: 5px; cursor: pointer; align-items: center; display: flex; background-color: #<%= item.color %>;">
+<!--
+<div class="item" data-sortable-item-id="<%#= item.id %>" data-sortable-item-user-id="<%#= item.user.id %>" style="width: 120px; margin: 5px; padding: 5px; border-radius: 5px; cursor: pointer; align-items: center; background-color: #<%#= item.color %>;">
+  -->
+<div class="item" data-sortable-item-id="<%= item.id %>" data-sortable-item-user-id="<%= item.user.id %>">
     <!--
   <div style="width: 200px; margin: 5px; padding: 5px; border-radius: 5px; cursor: pointer; display: flex; align-items: center; background-color: #<%#= item.color %>;">
     -->
-  <!--
-  <div id="<%#= dom_id item %>">
-    -->
-    <div class="item__body">
+  <!--     -->
+  <div id="<%= dom_id item %>" class="item__body" style="width: 120px; margin: 5px; padding: 5px; border-radius: 5px; cursor: pointer; align-items: center; display: flex; background-color: #<%= item.color %>;">
+    <div class="item__info">
       <%#= item.id %>
       <%= item.name %>
       <%#= item.row_order %>
       <%#= tag.meta name: "item_user_username", content: item.user.username %>
       <%#= tag.meta name: "item_user_id", content: item.user.id %>
-    </div>
+    </div><!-- item__info -->
 
     <div class="item__buttons" style="margin-left: auto; display: flex;">
       <!--<i class="fa fa-times-circle" style="color: red;"></i>-->
@@ -28,6 +29,6 @@
           <i class="fa fa-times-circle" style="color: red;"></i>
         <% end %>
       <% end %>
-    </div><!-- item__ buttons -->
-  </div><!-- item -->
-<%# end %>
+    </div><!-- item__buttons -->
+  </div><!-- item__body -->
+</div><!-- item -->
