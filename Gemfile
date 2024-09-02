@@ -51,7 +51,7 @@ gem "rails_db"
 
 gem "ranked-model"
 gem "rolify"
-gem "cancancan"
+gem "cancancan", '~> 3.6.1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -69,5 +69,14 @@ group :development do
   # gem "spring"
 end
 
-
 gem "requestjs-rails", "~> 0.0.11"
+
+gem 'capistrano' , '~> 3.18'
+gem 'capistrano-rails' , '~> 1.6'
+gem 'capistrano-passenger' , '~> 0.2.1'
+gem 'capistrano-asdf' , '~> 1.1'
+#gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+
+#gem "bcrypt_pbkdf"
+#gem "ed25519"
+#gem 'mysql2'

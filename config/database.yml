@@ -79,6 +79,6 @@ test:
 #
 production:
   <<: *default
-  database: donghaknyun_production
-  username: donghaknyun
+  database: donghaknyun
+  username: deploy
   password: <%= ENV["DONGHAKNYUN_DATABASE_PASSWORD"] %>
