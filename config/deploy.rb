@@ -1,6 +1,6 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.18"
-
+set :rails_env, "production"
 set :application, "donghaknyun"
 #set :repo_url, "git@github.com:ShinJaehun/donghaknyun.git"
 set :repo_url, "https://github.com/ShinJaehun/donghaknyun.git"
@@ -18,7 +18,7 @@ set :format_options, command_output: true, log_file: 'log/capistrano.log', color
 
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
-#append :linked_files, 'config/database.yml', 'config/credentials/production.key
+append :linked_files, 'config/database.yml', 'config/credentials/production.key'
 #append :linked_files, 'config/credentials/production.key'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads', 'storage'
 

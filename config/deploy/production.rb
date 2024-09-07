@@ -8,7 +8,8 @@
 # server "db.example.com", user: "deploy", roles: %w{db}
 #server '132.145.83.255', user: 'deploy', roles: %w{app db web}
 #server '146.56.137.164', user: 'deploy', roles: %w{app db web}
-server '130.162.145.22', user: 'deploy', roles: %w{app db web}
+#server '130.162.145.22', user: 'deploy', roles: %w{app db web}
+server '132.226.235.19', user: 'deploy', roles: %w{app db web}
 
 
 
