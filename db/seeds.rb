@@ -36,68 +36,73 @@ u12.add_role(:admin)
 u13.add_role(:admin)
 
 s0 = Schedule.create(entry_date: Time.strptime("2024-03-01", "%Y-%m-%d").to_time)
-s1 = Schedule.create(entry_date: Time.zone.today.monday)
-s2 = Schedule.create(entry_date: Time.zone.today.monday+1)
-s3 = Schedule.create(entry_date: Time.zone.today.monday+2)
-s4 = Schedule.create(entry_date: Time.zone.today.monday+3)
-s5 = Schedule.create(entry_date: Time.zone.today.monday+4)
+#s1 = Schedule.create(entry_date: Time.zone.today.monday)
+#s2 = Schedule.create(entry_date: Time.zone.today.monday+1)
+#s3 = Schedule.create(entry_date: Time.zone.today.monday+2)
+#s4 = Schedule.create(entry_date: Time.zone.today.monday+3)
+#s5 = Schedule.create(entry_date: Time.zone.today.monday+4)
 
 list1 = List.create(name: 'TODO', schedule: s0, period: 0, floor: 0)
 list1.items.create(name: "과학1", body: "식물의 한살이", user: u1, color: "ffddd6")
 list1.items.create(name: "과학2", body: "용수철 저울", user: u1, color: "daf7a6")
 list1.items.create(name: "과학3", body: "혼합물 분리", user: u1, color: "ffc300")
 
-List.create(name: '1교시', schedule: s1, period: 1, floor: 3)
-List.create(name: '2교시', schedule: s1, period: 2, floor: 3)
-List.create(name: '3교시', schedule: s1, period: 3, floor: 3)
-List.create(name: '4교시', schedule: s1, period: 4, floor: 3)
-List.create(name: '5교시', schedule: s1, period: 5, floor: 3)
-List.create(name: '1교시', schedule: s1, period: 1, floor: 4)
-List.create(name: '2교시', schedule: s1, period: 2, floor: 4)
-List.create(name: '3교시', schedule: s1, period: 3, floor: 4)
-List.create(name: '4교시', schedule: s1, period: 4, floor: 4)
-List.create(name: '5교시', schedule: s1, period: 5, floor: 4)
+for i in 0..4
+  s=Schedule.create(entry_date: Time.zone.today + i)
+  for j in 1..6
+    if j == 6 and i != 1
+      List.create(name: "#{j}교시", schedule: s, period: j, floor: 3, activated: false)
+    else
+      List.create(name: "#{j}교시", schedule: s, period: j, floor: 3, activated: true)
+    end
+  end
+  for j in 1..6
+    if j == 6 and i != 1
+      List.create(name: "#{j}교시", schedule: s, period: j, floor: 4, activated: false)
+    else
+      List.create(name: "#{j}교시", schedule: s, period: j, floor: 4, activated: true)
+    end
+  end
+end
 
-List.create(name: '1교시', schedule: s2, period: 1, floor: 3)
-List.create(name: '2교시', schedule: s2, period: 2, floor: 3)
-List.create(name: '3교시', schedule: s2, period: 3, floor: 3)
-List.create(name: '4교시', schedule: s2, period: 4, floor: 3)
-List.create(name: '5교시', schedule: s2, period: 5, floor: 3)
-List.create(name: '1교시', schedule: s2, period: 1, floor: 4)
-List.create(name: '2교시', schedule: s2, period: 2, floor: 4)
-List.create(name: '3교시', schedule: s2, period: 3, floor: 4)
-List.create(name: '4교시', schedule: s2, period: 4, floor: 4)
-List.create(name: '5교시', schedule: s2, period: 5, floor: 4)
 
-List.create(name: '1교시', schedule: s3, period: 1, floor: 3)
-List.create(name: '2교시', schedule: s3, period: 2, floor: 3)
-List.create(name: '3교시', schedule: s3, period: 3, floor: 3)
-List.create(name: '4교시', schedule: s3, period: 4, floor: 3)
-List.create(name: '5교시', schedule: s3, period: 5, floor: 3)
-List.create(name: '1교시', schedule: s3, period: 1, floor: 4)
-List.create(name: '2교시', schedule: s3, period: 2, floor: 4)
-List.create(name: '3교시', schedule: s3, period: 3, floor: 4)
-List.create(name: '4교시', schedule: s3, period: 4, floor: 4)
-List.create(name: '5교시', schedule: s3, period: 5, floor: 4)
 
-List.create(name: '1교시', schedule: s4, period: 1, floor: 3)
-List.create(name: '2교시', schedule: s4, period: 2, floor: 3)
-List.create(name: '3교시', schedule: s4, period: 3, floor: 3)
-List.create(name: '4교시', schedule: s4, period: 4, floor: 3)
-List.create(name: '5교시', schedule: s4, period: 5, floor: 3)
-List.create(name: '1교시', schedule: s4, period: 1, floor: 4)
-List.create(name: '2교시', schedule: s4, period: 2, floor: 4)
-List.create(name: '3교시', schedule: s4, period: 3, floor: 4)
-List.create(name: '4교시', schedule: s4, period: 4, floor: 4)
-List.create(name: '5교시', schedule: s4, period: 5, floor: 4)
-
-List.create(name: '1교시', schedule: s5, period: 1, floor: 3)
-List.create(name: '2교시', schedule: s5, period: 2, floor: 3)
-List.create(name: '3교시', schedule: s5, period: 3, floor: 3)
-List.create(name: '4교시', schedule: s5, period: 4, floor: 3)
-List.create(name: '5교시', schedule: s5, period: 5, floor: 3)
-List.create(name: '1교시', schedule: s5, period: 1, floor: 4)
-List.create(name: '2교시', schedule: s5, period: 2, floor: 4)
-List.create(name: '3교시', schedule: s5, period: 3, floor: 4)
-List.create(name: '4교시', schedule: s5, period: 4, floor: 4)
-List.create(name: '5교시', schedule: s5, period: 5, floor: 4)
+#for i in 1..6 do
+#  List.create(name: "#{i}교시", schedule: s1, period: i, floor: 3, activated: true)
+#end
+#
+#for i in 1..6 do
+#  List.create(name: "#{i}교시", schedule: s1, period: i, floor: 4, activated: true)
+#end
+#
+#for i in 1..6 do
+#  List.create(name: "#{i}교시", schedule: s2, period: i, floor: 3, activated: true)
+#end
+#
+#for i in 1..6 do
+#  List.create(name: "#{i}교시", schedule: s2, period: i, floor: 4, activated: true)
+#end
+#
+#for i in 1..6 do
+#  List.create(name: "#{i}교시", schedule: s3, period: i, floor: 3, activated: true)
+#end
+#
+#for i in 1..6 do
+#  List.create(name: "#{i}교시", schedule: s3, period: i, floor: 4, activated: true)
+#end
+#
+#for i in 1..6 do
+#  List.create(name: "#{i}교시", schedule: s4, period: i, floor: 3, activated: false)
+#end
+#
+#for i in 1..6 do
+#  List.create(name: "#{i}교시", schedule: s4, period: i, floor: 4, activated: false)
+#end
+#
+#for i in 1..6 do
+#  List.create(name: "#{i}교시", schedule: s5, period: i, floor: 3, activated: false)
+#end
+#
+#for i in 1..6 do
+#  List.create(name: "#{i}교시", schedule: s5, period: i, floor: 4, activated: false)
+#end

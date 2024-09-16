@@ -13,7 +13,7 @@
     <div class="col floor3" style="text-align: center;">
       <h5>3층</h5>
       <% schedule.lists.each do |list| %>
-        <% if list.floor == 3 %>
+        <% if list.floor == 3 and list.activated == true %>
           <%= render list %>
         <% end %>
       <% end %>
@@ -22,7 +22,7 @@
     <div class="col floor4" style="text-align: center;">
       <h5>4층</h5>
       <% schedule.lists.each do |list| %>
-        <% if list.floor == 4 %>
+        <% if list.floor == 4 and list.activated == true %>
           <%= render list %>
         <% end %>
       <% end %>

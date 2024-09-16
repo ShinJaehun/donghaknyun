@@ -16,15 +16,34 @@ class SchedulesController < ApplicationController
 
   def create
     if !Schedule.all.where(entry_date: Time.zone.today.next_week.all_week).present?
+      #for i in 0..4
+        #s=Schedule.create(entry_date: Time.zone.today.next_week + i)
+        #for i in 1..6
+          #s.lists.create(name: "#{i}교시", period: i, floor: 3)
+        #end
+        #for i in 1..6
+          #s.lists.create(name: "#{i}교시", period: i, floor: 4)
+        #end
+      #end
+
       for i in 0..4
         s=Schedule.create(entry_date: Time.zone.today.next_week + i)
-        for i in 1..5
-          s.lists.create(name: "#{i}교시", period: i, floor: 3)
+        for j in 1..6
+          if j == 6 and i != 1
+            List.create(name: "#{j}교시", schedule: s, period: j, floor: 3, activated: false)
+          else
+            List.create(name: "#{j}교시", schedule: s, period: j, floor: 3, activated: true)
+          end
         end
-        for i in 1..5
-          s.lists.create(name: "#{i}교시", period: i, floor: 4)
+        for j in 1..6
+          if j == 6 and i != 1
+            List.create(name: "#{j}교시", schedule: s, period: j, floor: 4, activated: false)
+          else
+            List.create(name: "#{j}교시", schedule: s, period: j, floor: 4, activated: true)
+          end
         end
       end
+
 
       respond_to do |format|
         format.html { redirect_to schedules_url, notice: "다음 주 스케줄 추가 성공!" }
