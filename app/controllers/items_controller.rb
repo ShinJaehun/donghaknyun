@@ -53,14 +53,9 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        puts "********************************************************************************"
-        #format.html { redirect_to schedules_url, notice: "Item was successfully updated." }
         format.turbo_stream do
           render turbo_stream: turbo_stream.update("item_#{@item.id}", partial: "/items/source_item", locals: { item: @item })
         end
-        #format.turbo_stream do
-          #render turbo_stream: turbo_stream.update(@item)
-        #end
         format.html { redirect_to schedules_url, notice: "Item was successfully updated." }
       else
         format.html { redirect_to schedules_url, status: :unprocessable_entity }

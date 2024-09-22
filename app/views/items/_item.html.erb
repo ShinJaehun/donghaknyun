@@ -1,23 +1,9 @@
-<div class="item" data-sortable-item-id="<%= item.id %>" data-sortable-item-user-id="<%= item.user.id %>">
-  <div id="<%= dom_id item %>" class="item__body" style="width: 120px; margin: 5px; padding: 5px; border-radius: 5px; cursor: pointer; align-items: center; display: flex; background-color: #<%= item.color %>;">
+<div id="<%= dom_id item %>" class="item" data-sortable-item-id="<%= item.id %>" data-sortable-item-user-id="<%= item.user.id %>">
+  <div class="item__body" style="width: 120px; margin: 5px; padding: 5px; border-radius: 5px; cursor: pointer; align-items: center; display: flex; background-color: #<%= item.color %>;">
     <div class="item__info">
       <%= item.name %>
     </div><!-- item__info -->
-
     <div class="item__buttons" style="margin-left: auto; display: flex;">
-      <!--<i class="fa fa-times-circle" style="color: red;"></i>-->
-      <%# if user_signed_in? && item.user_id == current_user.id %>
-      <!-- 여기서 turbo_frame 달고 edit하려니 stimulus 관련해서 문제 발생! -->
-      <%# if item.list_id == 1 and can? :edit, item %>
-        <%#= link_to edit_item_path(item) do %>
-          <!--<i class="fa fa-pen-to-square" style="color: black; margin-right: 5px;"></i>-->
-        <%# end %>
-      <%# end %>
-      <%# if can? :edit, item %>
-        <%#= link_to edit_item_path(item), data: { turbo_frame: :modal } do %>
-          <!--<i class="fa fa-pen-to-square" style="color: black; margin-right: 5px;"></i>-->
-        <%# end %>
-      <%# end %>
       <% if can? :destroy, item %>
         <%= link_to item_path(item), data: { turbo_method: :delete } do %>
           <i class="fa fa-times-circle" style="color: red;"></i>
