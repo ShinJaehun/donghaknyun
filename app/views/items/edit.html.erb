@@ -1,3 +1,7 @@
-<%= turbo_frame_tag @item do %>
-  <%= render "form", item: @item %>
+<%= turbo_frame_tag :modal do %>
+  <div data-controller="modals">
+    <div class="modal-custom" data-action="turbo:submit-end->modals#submitEnd">
+      <%= render "form", item: @item %>
+    </div>
+  </div>
 <% end %>

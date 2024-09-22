@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  #before_action :set_item, only: %i[ edit update destroy ]
-  before_action :set_item, only: %i[ destroy ]
+  before_action :set_item, only: %i[ edit update destroy ]
+  #before_action :set_item, only: %i[ destroy ]
 
   load_and_authorize_resource
 
@@ -25,7 +25,6 @@ class ItemsController < ApplicationController
     #debugger
     @item.save
     head :no_content
-
   end
 
   def new
@@ -48,23 +47,31 @@ class ItemsController < ApplicationController
     end
   end
 
-  #def edit
-  #end
+  def edit
+  end
 
-  #def update
-    #respond_to do |format|
-      #if @item.update(list_params)
-        #format.html { redirect_to lists_url, notice: "Item was successfully updated." }
-      #else
-        #format.html { redirect_to lists_url, status: :unprocessable_entity }
-      #end
-    #end
-  #end
+  def update
+    respond_to do |format|
+      if @item.update(item_params)
+        puts "********************************************************************************"
+        #format.html { redirect_to schedules_url, notice: "Item was successfully updated." }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update("item_#{@item.id}", partial: "/items/source_item", locals: { item: @item })
+        end
+        #format.turbo_stream do
+          #render turbo_stream: turbo_stream.update(@item)
+        #end
+        format.html { redirect_to schedules_url, notice: "Item was successfully updated." }
+      else
+        format.html { redirect_to schedules_url, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def destroy
     @item.destroy!
     respond_to do |format|
-      format.html { redirect_to schedules_path, notice: "삭제 성공!" }
+      format.html { redirect_to schedules_url, notice: "삭제 성공!" }
       #format.turbo_stream
     end
   end

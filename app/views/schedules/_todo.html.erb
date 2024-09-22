@@ -5,14 +5,19 @@
         <%= schedule_source.lists.first.name %>
       </h3>
     </div>
+    <!--
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Launch demo modal
+    </button>
+    -->
     <div style="margin-left: auto;">
       <% if can? :manage, Item %>
-        <%= link_to "Create", new_item_path, class: "btn btn-primary", data: { turbo_frame: dom_id(Item.new) } %>
+        <%= link_to "Create", new_item_path, class: "btn btn-primary", data: { turbo_frame: :modal } %>
       <% end %>
     </div>
   </div><!-- todo head -->
 
-  <%= turbo_frame_tag Item.new %>
+  <%= turbo_frame_tag :modal %>
 
   <%= turbo_frame_tag "items" do %>
     <div id="group_source" class="items" data-controller="sortable" data-sortable-group-value="items" data-sortable-item-list-id="1" style="display: flex; flex-wrap: wrap;">
@@ -22,3 +27,4 @@
     </div><!-- group_source -->
   <% end %>
 </div><!-- todo -->
+

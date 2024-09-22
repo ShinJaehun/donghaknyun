@@ -44,7 +44,6 @@ class SchedulesController < ApplicationController
         end
       end
 
-
       respond_to do |format|
         format.html { redirect_to schedules_url, notice: "다음 주 스케줄 추가 성공!" }
       end
